@@ -6,31 +6,32 @@ Task is coloring a graph with n vertices with minimum number of color possible
 
 ## Representation
   Arrays with length n that every element represents a vertex calls chromosome
-  Inside of each chromosome element placed a number between 0 & maximum number of color is accessable (detemined by user)
+  
+  Inside of each chromosome's element placed a number between 0 & maximum number of color is accessable (number of accessable colors has been detemine by user)
   
 ## Inputs:
-### Graph
-  There is 2 ways for giving graph input to program:
+   ### Graph
+   There is 2 ways for giving graph input to program:
    - Adjacency Matrix 
    - Getting Connections one by one
 
-### Initial Population coefficient
-  Number of population in every generation is multiple of number of vertices.
+   ### Initial Population coefficient
+   Number of population in every generation is multiple of number of vertices.
   
-  In this input you determine this coefficient.
+   In this input you determine this coefficient.
   
-  Number of population = Population coefficient × Number of vertices
+   Number of population = Population coefficient × Number of vertices
 
-### Number of Generation
-  An integer value -> default is 200
+   ### Number of Generation
+   An integer value -> default is 200
 
-### Crossover Rate
-  Probability of crossover occur -> default is 0.8
+   ### Crossover Rate
+   Probability of crossover occur -> default is 0.8
   
-### Mutation Rate 
-  Probability of mutation occur -> default is 0.1
+   ### Mutation Rate 
+   Probability of mutation occur -> default is 0.1
    
-  ⚠️ For prevent error occur , every input should be autheticate by program!
+   ⚠️ For prevent error occur , every input should be autheticate by program!
    
 ## Objective Function(OF):  
    Objevtive function for this problem has 2 parts:
@@ -98,10 +99,12 @@ Task is coloring a graph with n vertices with minimum number of color possible
   
 ## Run Example:
   - Run `EC.py` file
-  - Enter number of vertices
+  - Enter number of vertices & number of available colors
   - Enter algorithm parameter(such as crossove rate & etc)
   - Enter graph
   - Get answer & enjoy!
+  
+  ⚠️ No need enter colors names!
   
 Good Luck Guys! :trollface: 
     
