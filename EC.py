@@ -6,15 +6,14 @@ import msvcrt
 import networkx as nx
 import matplotlib.pyplot as plt
 
-##################################### Inputs ###################################
+##################################### Default Values ###################################
 InitialPopulationCoef = 2  # Value of c in N=cn formula for number of initial population
 P_Crossover = 0.8  # Probebility Of Crossover
 P_Mutation = 0.1  # Probebility Of Mutation
 NumberOfGenerations = 200
 Population = []  # Population List
 InterMediatePopulation = []
-Colors = []
-
+Colors = ['red' , 'blue' , 'green' , 'yellow' , 'purple' , 'brown' , 'grey' , 'orange' , 'black' ]
 
 
 class Chromosome:   # Storage a Chromosome with its Objective Function
@@ -80,10 +79,6 @@ while True:    # Get Number of Colors
     else:
         print('Invalid Format For Number of Colors!\n Number of Colors Should be an Integer Value...\n')
         msvcrt.getch()
-
-for i in range(NumberOfColors):
-    Temp = input('Enter Color {} Name:\n'.format(i))
-    Colors.append(Temp)
 
 while True:    # Get Initial Population Coef
     os.system('cls')
@@ -175,8 +170,8 @@ while True:    # Get Probebility Of Mutation
 Best = Chromosome(random.randint(NumberOfColors , size=NumberOfVetex))
 Best.ObjectiveFunction = ((NumberOfVetex * (NumberOfVetex-1)) / 2) + NumberOfColors
 
-# Create Neighborhood Matrix for Graph
-NeighborhoodMatrix = np.zeros((NumberOfVetex, NumberOfVetex))
+# Create Adjacency Matrix for Graph
+AdjacencyMatrix = np.zeros((NumberOfVetex, NumberOfVetex))
 os.system('cls')
 
 if NumberOfColors >= NumberOfVetex:
@@ -190,7 +185,7 @@ def NumberOfEdges():   # Calculate Number of Edges
     count = 0
     for i in range(0, NumberOfVetex):
         for j in range(i+1, NumberOfVetex):
-            if NeighborhoodMatrix[i][j] == 1:
+            if AdjacencyMatrix[i][j] == 1:
                 count += 1
     return count
 
@@ -247,8 +242,8 @@ def Get_A_Connection():  # Get , Autheticate & Add A Connection To Neighborhood 
             os.system('cls')
 
     if VertexAuthenticator(Origin) == True and VertexAuthenticator(Destination) == True:
-        NeighborhoodMatrix[Origin][Destination] = 1
-        NeighborhoodMatrix[Destination][Origin] = 1
+        AdjacencyMatrix[Origin][Destination] = 1
+        AdjacencyMatrix[Destination][Origin] = 1
         print('Connection {}->{}  Added! \n'.format(Origin, Destination))
         print('Press Any Key To Continue...')
         msvcrt.getch()
@@ -275,7 +270,7 @@ def GetConnections():  # Provide A Menu To Add Connections To The Input Graph
             print('Invalid Option!\n')
             msvcrt.getch()
 
-def GetNeiborhoodMatrix():   # Gets Upper Triangle of Neighborhood Matrix as A Graph
+def GetAdjacencyMatrix():   # Gets Upper Triangle of Neighborhood Matrix as A Graph
     """
     Gets Upper Triangle of Neighborhood Matrix as A Graph
     """
@@ -285,7 +280,7 @@ def GetNeiborhoodMatrix():   # Gets Upper Triangle of Neighborhood Matrix as A G
             while True:
                 Temp = input('Enter Element ({} , {})\n'.format(i, j))
                 if MatrixElementsAuthenticator(Temp) == True:
-                    NeighborhoodMatrix[i][j] = int(Temp)
+                    AdjacencyMatrix[i][j] = int(Temp)
                     break
                 else:
                     print(
@@ -307,7 +302,7 @@ def ObjectiveFunction(Chromosome):  # Calculate Conflicts Two Neighbor Vertex
     Count = 0
     for i in range(0, NumberOfVetex):
         for j in range(i+1, NumberOfVetex):
-            if NeighborhoodMatrix[i][j] == 1:
+            if AdjacencyMatrix[i][j] == 1:
                 if Chromosome[i] == Chromosome[j]:
                     Count += 1
     return Count
@@ -410,7 +405,7 @@ def GraphDraw(chromosome): # Draw Result Colored Graph
 
     for i in range(0, NumberOfVetex):
         for j in range(i+1, NumberOfVetex):
-            if NeighborhoodMatrix[i][j] == 1:
+            if AdjacencyMatrix[i][j] == 1:
                 Graph.add_edge(i , j)          
 
     for m in chromosome:
@@ -434,7 +429,7 @@ def Menu():  # Provide Menu Of The Program
     os.system('cls')
 
     if Selector.decode("utf-8") == '1':
-        GetNeiborhoodMatrix()
+        GetAdjacencyMatrix()
 
     elif Selector.decode("utf-8") == '2':
         GetConnections()
